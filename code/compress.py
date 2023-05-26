@@ -49,16 +49,16 @@ def get_rep(folder, c_id, N):
 
 	result_phrases = [cur_label]	
 
-	ph_f = '%s/caseolap.txt' % par_folder
+	ph_f = '%s\\caseolap.txt' % par_folder
 	if exists(ph_f):
-		kw_clus_f = '%s/cluster_keywords.txt' % par_folder
+		kw_clus_f = '%s\\cluster_keywords.txt' % par_folder
 		kws = set()
 		with open(kw_clus_f) as f:
 			for line in f:
 				clus_id, ph = line.strip('\r\n').split('\t')
 				if clus_id == c_id:
 					kws.add(ph)
-		emb_f = '%s/embeddings.txt' % par_folder
+		emb_f = '%s\\embeddings.txt' % par_folder
 		embs = utils.load_embeddings(emb_f)
 
 		# print len(kws)
@@ -83,8 +83,8 @@ def get_rep(folder, c_id, N):
 	elif ph_idf == None:
 		print('looking at embeddings for %s' % folder)
 
-		ph_f = '%s/embeddings.txt' % par_folder
-		kw_f = '%s/keywords.txt' % par_folder
+		ph_f = '%s\\embeddings.txt' % par_folder
+		kw_f = '%s\\keywords.txt' % par_folder
 		keywords = set()
 		with open(kw_f) as f:
 			for line in f:
@@ -120,8 +120,8 @@ def get_rep(folder, c_id, N):
 	else:
 		# Using TF-IDF to generate
 		print('looking at tf-idf for %s' % folder)
-		d_clus_f = '%s/paper_cluster.txt' % par_folder
-		kw_clus_f = '%s/cluster_keywords.txt' % par_folder
+		d_clus_f = '%s\\paper_cluster.txt' % par_folder
+		kw_clus_f = '%s\\cluster_keywords.txt' % par_folder
 		docs = []
 		kws = set()
 		with open(d_clus_f) as f:
@@ -169,7 +169,7 @@ def recursion(root, o_file, N):
 	while not q.empty():
 		(c_folder, c_id, c_name) = q.get()
 		
-		hier_f = '%s/hierarchy.txt' % c_folder
+		hier_f = '%s\\hierarchy.txt' % c_folder
 		if not exists(hier_f):
 			continue
 
@@ -177,8 +177,8 @@ def recursion(root, o_file, N):
 
 		for cluster in hier_map:
 			cc_id = hier_map[cluster]
-			cluster_folder = '%s/%s' % (c_folder, cluster)
-			cluster_namespace = '%s/%s' % (c_name, cluster)
+			cluster_folder = '%s\\%s' % (c_folder, cluster)
+			cluster_namespace = '%s\\%s' % (c_name, cluster)
 			q.put((cluster_folder, cc_id, cluster_namespace))
 
 		# handle current
@@ -191,7 +191,7 @@ def recursion(root, o_file, N):
 
 
 if __name__ == "__main__":
-  # python compress.py -root ../data/dblp/our-l3-0.15 -output ../data/dblp/taxonomies/l3-our-0.15.txt
+  # python compress.py -root ..\\data\\dblp\\our-l3-0.15 -output ..\\data\\dblp\\taxonomies\\l3-our-0.15.txt
 	parser = argparse.ArgumentParser(prog='compress.py', \
 			description='')
 	parser.add_argument('-root', required=True, \

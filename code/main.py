@@ -92,7 +92,7 @@ def recur(input_dir, node_dir, n_cluster, parent, n_cluster_iter, filter_thre,\
         if local_embedding is False:
             src_file = node_dir + 'embeddings.txt'
             for child in children:
-                tgt_file = node_dir + child + '/embeddings.txt'
+                tgt_file = node_dir + child + '\\embeddings.txt'
                 # copyfile(src_file, tgt_file)
                 symlink(src_file, tgt_file)
         else:
@@ -102,12 +102,12 @@ def recur(input_dir, node_dir, n_cluster, parent, n_cluster_iter, filter_thre,\
             print(("[Main] Finish running local embedding training using %s (seconds)" % (end - start)))
 
     for child in children:
-        recur(input_dir, node_dir + child + '/', n_cluster, child, n_cluster_iter, \
+        recur(input_dir, node_dir + child + '\\', n_cluster, child, n_cluster_iter, \
               filter_thre, n_expand, level + 1, caseolap, local_embedding)
 
 def main(opt):
     input_dir = opt['input_dir']
-    init_dir = opt['data_dir'] + 'init/'
+    init_dir = opt['data_dir'] + 'init\\'
     n_cluster = opt['n_cluster']
     filter_thre = opt['filter_thre']
     n_expand = opt['n_expand']
@@ -115,7 +115,7 @@ def main(opt):
     level = 0
 
     # our method
-    root_dir = opt['data_dir'] + 'our-l3-0.15/'
+    root_dir = opt['data_dir'] + 'our-l3-0.15\\'
     copy_tree(init_dir, root_dir)
     recur(input_dir, root_dir, n_cluster, '*', n_cluster_iter, filter_thre, n_expand, level, True, True)
 
