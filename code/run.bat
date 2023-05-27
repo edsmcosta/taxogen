@@ -1,11 +1,11 @@
 @echo off
 SET corpusName=dblp
 SET taxonName=our-l3-0.15
-SET FIRST_RUN=0
+SET FIRST_RUN=1
 
 IF %FIRST_RUN%==1  (
   echo "Start data preprocessing"
-  gcc "word2vec-new.c" "-o" "word2vec" "-lm" "-pthread" "-O2" "-Wall" "-funroll-loops" "-Wno-unused-result" "-msse2"
+  gcc "word2vec-new.c" "-o" "word2vec" "-lm" "-pthread" "-O2" "-Wall" "-funroll-loops" "-Wno-unused-result"
   
   IF not exist "..\data\%corpusName%\init" (
     mkdir "..\data\%corpusName%\init"

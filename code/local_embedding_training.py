@@ -11,9 +11,9 @@ import os
 
 def read_files(folder, parent):
     print(("[Local-embedding] Reading file:", parent))
-    emb_file = '%s/embeddings.txt' % folder
-    hier_file = '%s/hierarchy.txt' % folder
-    keyword_file = '%s/keywords.txt' % folder ## here only consider those remaining keywords
+    emb_file = '%s\\embeddings.txt' % folder
+    hier_file = '%s\\hierarchy.txt' % folder
+    keyword_file = '%s\\keywords.txt' % folder ## here only consider those remaining keywords
 
     embs = utils.load_embeddings(emb_file)
     keywords = set()
@@ -112,7 +112,7 @@ def run_word2vec(pd_map, docs, cates, folder):
         # sub_folder = '%s/%s' % (folder, cate)
         # input_f = '%s/text' % sub_folder
         # output_f = '%s/embeddings.txt' % sub_folder
-        sub_folder = folder + cate + '/'
+        sub_folder = folder + cate + '\\'
         input_f = sub_folder + 'text'
         output_f = sub_folder + 'embeddings.txt'
         if not os.path.exists(sub_folder):
@@ -126,7 +126,7 @@ def run_word2vec(pd_map, docs, cates, folder):
         print(output_f)
         # embed_proc = subprocess.Popen(["./word2vec", "-threads", "20", "-train", input_f, "-output", output_f], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         # embed_proc.wait()
-        subprocess.call(["./word2vec", "-threads", "20", "-train", input_f, "-output", output_f])
+        subprocess.call(["./word2vec-new", "-threads", "20", "-train", input_f, "-output", output_f])
         print('[Local-embedding] done training word2vec')
 
 

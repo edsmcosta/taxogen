@@ -17,6 +17,7 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <inttypes.h>
 #if defined _WIN32
 #include "win32-port.h"
 #else
@@ -36,7 +37,7 @@ extern void cblas_sscal(const int n, const float alpha, float *x,
 static const float zero = 0;
 #endif
 
-#define MAX_STRING 100
+#define MAX_STRING 200
 #define EXP_TABLE_SIZE 1000
 #define MAX_EXP 6
 #define MAX_SENTENCE_LENGTH 1000
@@ -307,7 +308,7 @@ void LearnVocabFromTrainFile() {
     if (feof(fin)) break;
     train_words++;
     if ((debug_mode > 1) && (train_words % 100000 == 0)) {
-      printf("%lldK%c", train_words / 1000, 13);
+      printf("%I64u K %c", train_words / 1000, 13);
       fflush(stdout);
     }
     i = SearchVocab(word);
@@ -320,8 +321,8 @@ void LearnVocabFromTrainFile() {
   }
   SortVocab();
   if (debug_mode > 0) {
-    printf("Vocab size: %lld\n", vocab_size);
-    printf("Words in train file: %lld\n", train_words);
+    printf("Vocab size: %I64u\n", vocab_size);
+    printf("Words in train file: %I64u\n", train_words);
   }
   file_size = ftell(fin);
   fclose(fin);
@@ -331,7 +332,7 @@ void SaveVocab() {
   long long i;
   FILE *fo = fopen(save_vocab_file, "wb");
   for (i = 0; i < vocab_size; i++)
-    fprintf(fo, "%s %lld\n", vocab[i].word, vocab[i].cn);
+    fprintf(fo, "%s %I64u\n", vocab[i].word, vocab[i].cn);
   fclose(fo);
 }
 
@@ -350,13 +351,13 @@ void ReadVocab() {
     ReadWord(word, fin);
     if (feof(fin)) break;
     a = AddWordToVocab(word);
-    fscanf(fin, "%lld%c", &vocab[a].cn, &c);
+    fscanf(fin, "%I64u%c", &vocab[a].cn, &c);
     i++;
   }
   SortVocab();
   if (debug_mode > 0) {
-    printf("Vocab size: %lld\n", vocab_size);
-    printf("Words in train file: %lld\n", train_words);
+    printf("Vocab size: %I64u\n", vocab_size);
+    printf("Words in train file: %I64u\n", train_words);
   }
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
@@ -419,13 +420,13 @@ void *TrainModelThread(void *id) {
                                           sentence_position = 0;
   long long word_count = 0, last_word_count = 0, sen[MAX_SENTENCE_LENGTH + 1];
   long long l1, l2, c, target, label, local_iter = iter;
-  unsigned long long next_random = (long long)id;
+  unsigned long long next_random = (long long)(intptr_t)id;
   real f, g;
   clock_t now;
   real *neu1 = (real *)calloc(layer1_size, sizeof(real));
   real *neu1e = (real *)calloc(layer1_size, sizeof(real));
   FILE *fi = fopen(train_file, "rb");
-  fseek(fi, file_size / (long long)num_threads * (long long)id, SEEK_SET);
+  fseek(fi, file_size / (long long)num_threads * (long long)(intptr_t)id, SEEK_SET);
   while (1) {
     if (word_count - last_word_count > 10000) {
       word_count_actual += word_count - last_word_count;
@@ -470,7 +471,7 @@ void *TrainModelThread(void *id) {
       word_count = 0;
       last_word_count = 0;
       sentence_length = 0;
-      fseek(fi, file_size / (long long)num_threads * (long long)id, SEEK_SET);
+      fseek(fi, file_size / (long long)num_threads * (long long)(intptr_t)id, SEEK_SET);
       continue;
     }
     word = sen[sentence_position];
@@ -699,6 +700,7 @@ void *TrainModelThread(void *id) {
   free(neu1);
   free(neu1e);
   pthread_exit(NULL);
+  return 0;
 }
 
 void TrainModel() {
@@ -722,7 +724,7 @@ void TrainModel() {
   fo = fopen(output_file, "wb");
   if (classes == 0) {
     // Save the word vectors
-    fprintf(fo, "%lld %lld\n", vocab_size, layer1_size);
+    fprintf(fo, "%I64u %I64u\n", vocab_size, layer1_size);
     for (a = 0; a < vocab_size; a++) {
       fprintf(fo, "%s ", vocab[a].word);
       if (binary)

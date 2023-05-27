@@ -78,7 +78,7 @@ def recur(input_dir, node_dir, n_cluster, parent, n_cluster_iter, filter_thre,\
                                df.cluster_keyword_file, df.hierarchy_file, df.doc_membership_file)
             except Exception as e:
                 print(e)
-                print('Clustering not finished.')
+                print('OLAP Clustering not finished.')
                 return
 
             start = time.time()
