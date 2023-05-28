@@ -12,10 +12,10 @@ from taxonomy import Taxonomy, TNode
 def handler(folder):
 
 	if True:
-		files = ['%s/%s' % (folder, f) for f in listdir(folder) if isfile(join(folder, f)) and 'intrusion_exp' in f]
+		files = ['%s\\%s' % (folder, f) for f in listdir(folder) if isfile(join(folder, f)) and 'intrusion_exp' in f]
 		print(files)
 
-		intru_gold = '%s/%s' % (folder, 'intrusion_gold.txt')
+		intru_gold = '%s\\%s' % (folder, 'intrusion_gold.txt')
 
 		gold = {}
 		methods = set()
@@ -94,10 +94,10 @@ def handler(folder):
 
 
 	# subdomain result
-	files = ['%s/%s' % (folder, f) for f in listdir(folder) if isfile(join(folder, f)) and 'subdomain_exp' in f]
+	files = ['%s\\%s' % (folder, f) for f in listdir(folder) if isfile(join(folder, f)) and 'subdomain_exp' in f]
 	print(files)
 
-	intru_gold = '%s/%s' % (folder, 'subdomain_gold.txt')
+	intru_gold = '%s\\%s' % (folder, 'subdomain_gold.txt')
 
 	gold = {}
 	methods = set()

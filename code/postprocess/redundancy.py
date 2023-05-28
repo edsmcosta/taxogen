@@ -66,9 +66,9 @@ def main(idx_file, taxonomy_dir, output_file):
 # tax_dir = '/shared/data/czhang82/projects/local-embedding/dblp/taxonomies/'
 # eval_dir = '/shared/data/czhang82/projects/local-embedding/dblp/results/'
 
-idx_file = '/Users/chao/data/projects/local-embedding/dblp/input/index.txt'
-tax_dir = '/Users/chao/data/projects/local-embedding/dblp/taxonomies/'
-eval_dir = '/Users/chao/data/projects/local-embedding/dblp/results/'
+idx_file = 'E:\\This-Local\\Projects\\_emcdl\\taxogen\\data\\dblp\\input\\index.txt'
+tax_dir = 'E:\\This-Local\\Projects\\_emcdl\\taxogen\\data\\dblp\\taxonomies\\'
+eval_dir = 'E:\\This-Local\\Projects\\_emcdl\\taxogen\\data\\dblp\\results\\'
 
 output_file = eval_dir + 'jaccard.txt'
 main(idx_file, tax_dir, output_file)

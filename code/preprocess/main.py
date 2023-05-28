@@ -7,10 +7,10 @@ from .config import *
 from .AutoPhraseOutput import AutoPhraseOutput
 from .SegPhraseOutput import SegPhraseOutput
 import re
-from pattern.en import parsetree
-from pattern.en import parse
-from pattern.search import search
-from pattern.en import pprint
+from pattern.text.en import parsetree
+from pattern.text.en import parse
+from pattern.text.search import search
+from pattern.text.en import pprint
 from textblob import TextBlob
 from collections import deque
 import time

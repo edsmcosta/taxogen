@@ -12,7 +12,7 @@ class TNode:
 		self.ph_cnt = len(ph_list)
 		self.parent = None
 		self.children = []
-		self.level = len(name.split('/'))
+		self.level = len(name.split('\\'))
 
 	def add_child(self, node):
 		if node not in self.children:
@@ -43,7 +43,7 @@ class Taxonomy:
 
 	def add_node(self, node):
 		self.all_nodes[node.name] = node
-		p_name = '/'.join(node.name.split('/')[:-1])
+		p_name = '\\'.join(node.name.split('\\')[:-1])
 		if self.find_node(p_name) is not None:
 			self.find_node(p_name).add_child(node)
 

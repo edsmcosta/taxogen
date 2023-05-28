@@ -143,7 +143,7 @@ class SubDataSet:
         clus_centers = clus.center_ids
         for clus_id, center_keyword_id in clus_centers:
             center_keyword = self.keywords[center_keyword_id]
-            output_file = parent_dir + center_keyword + '/seed_keywords.txt'
+            output_file = parent_dir + center_keyword + '\\seed_keywords.txt'
             ensure_directory_exist(output_file)
             members = clusters[clus_id]
             with open(output_file, 'w') as fout:
@@ -176,7 +176,7 @@ class SubDataSet:
         clus_centers = clus.center_ids
         for clus_id, center_keyword_id in clus_centers:
             center_keyword = self.keywords[center_keyword_id]
-            output_file = parent_dir + center_keyword + '/doc_ids.txt'
+            output_file = parent_dir + center_keyword + '\\doc_ids.txt'
             ensure_directory_exist(output_file)
             doc_ids = cluster_document_map[clus_id]
             with open(output_file, 'w') as fout:

@@ -22,6 +22,7 @@ class Clusterer:
 
     def fit(self):
         self.clus.fit(self.data)
+        print(('Clustering concentration score:', self.inertia_scores))
         labels = self.clus.labels_
         for idx, label in enumerate(labels):
             self.clusters[label].append(idx)
@@ -58,10 +59,15 @@ class Clusterer:
 def run_clustering(full_data, doc_id_file, filter_keyword_file, n_cluster, parent_direcotry, parent_description,\
                    cluster_keyword_file, hierarchy_file, doc_membership_file):
     dataset = SubDataSet(full_data, doc_id_file, filter_keyword_file)
-    print(('Start clustering for ', len(dataset.keywords), ' keywords under parent:', parent_description))
+    print(('Start clustering for ', len(dataset.keywords), ' keywords under parent:', parent_description, doc_membership_file))
     ## TODO: change later here for n_cluster selection from a range
     clus = Clusterer(dataset.embeddings, n_cluster)
-    clus.fit()
+    try:
+        clus.fit()
+    except Exception as e:
+        print(e)
+        print('[Cluster] Cluster fitting failed')
+        return
     print(('Done clustering for ', len(dataset.keywords), ' keywords under parent:', parent_description))
     dataset.write_cluster_members(clus, cluster_keyword_file, parent_direcotry)
     center_names = dataset.write_cluster_centers(clus, parent_description, hierarchy_file)

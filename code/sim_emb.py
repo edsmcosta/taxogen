@@ -24,8 +24,8 @@ def load_embeddings(embedding_file):
 def compare(a_f, b_f):
 
 	emb_f = 'embeddings.txt'
-	a_emb_f = '%s/%s' % (a_f, emb_f)
-	b_emb_f = '%s/%s' % (b_f, emb_f)
+	a_emb_f = '%s\\%s' % (a_f, emb_f)
+	b_emb_f = '%s\\%s' % (b_f, emb_f)
 
 	if not exists(a_emb_f) or not exists(b_emb_f):
 		print('Embedding file not found')

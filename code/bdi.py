@@ -83,9 +83,9 @@ def recursion(root, lvl):
         if level >= int(lvl):
             continue
         
-        hier_f = '%s/hierarchy.txt' % c_folder
-        clus_kws_f = '%s/cluster_keywords.txt' % c_folder
-        emb_f = '%s/embeddings.txt' % c_folder
+        hier_f = '%s\\hierarchy.txt' % c_folder
+        clus_kws_f = '%s\\cluster_keywords.txt' % c_folder
+        emb_f = '%s\\embeddings.txt' % c_folder
         if not exists(hier_f):
             continue
 

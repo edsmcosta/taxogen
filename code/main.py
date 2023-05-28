@@ -115,7 +115,7 @@ def main(opt):
     level = 0
 
     # our method
-    root_dir = opt['data_dir'] + 'our-l3-0.15\\'
+    root_dir = opt['data_dir'] + 'our-l5-015\\'
     copy_tree(init_dir, root_dir)
     recur(input_dir, root_dir, n_cluster, '*', n_cluster_iter, filter_thre, n_expand, level, True, True)
 

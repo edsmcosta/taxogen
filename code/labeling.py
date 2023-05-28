@@ -11,9 +11,9 @@ def label_emb_centric(folder, c_id):
 	# print folder
 	par_folder = dirname(folder)
 	cur_label = basename(folder)
-	p_case_f = '%s/caseolap.txt' % par_folder
-	c_case_f = '%s/caseolap.txt' % folder
-	emb_f = '%s/embeddings.txt' % par_folder
+	p_case_f = '%s\\caseolap.txt' % par_folder
+	c_case_f = '%s\\caseolap.txt' % folder
+	emb_f = '%s\\embeddings.txt' % par_folder
 
 	# generate word2vec phrases
 	embs = utils.load_embeddings(emb_f)
@@ -137,11 +137,11 @@ def recursion(root):
 	try:
 		while not q.empty():
 			(c_folder, c_id) = q.get()
-			hier_map = utils.load_hier_f('%s/hierarchy.txt' % c_folder)
+			hier_map = utils.load_hier_f('%s\\hierarchy.txt' % c_folder)
 
 			for cluster in hier_map:
 				cc_id = hier_map[cluster]
-				cluster_folder = '%s/%s' % (c_folder, cluster)
+				cluster_folder = '%s\\%s' % (c_folder, cluster)
 				q.put((cluster_folder, cc_id))
 
 			# handle current

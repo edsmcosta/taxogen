@@ -110,7 +110,7 @@ def read_taxonomy(tax_f):
 
 def handler(folder, output, N, isa_N, case_N):
 
-	files = ['%s/%s' % (folder, f) for f in listdir(folder) if isfile(join(folder, f))]
+	files = ['%s\\%s' % (folder, f) for f in listdir(folder) if isfile(join(folder, f))]
 	taxs = {}
 
 	for tax_f in files:
@@ -134,7 +134,7 @@ def handler(folder, output, N, isa_N, case_N):
 
 	# The intrusion part
 	if True:
-		intru_gold_f = '%s/intrusion_gold.txt' % output
+		intru_gold_f = '%s\\intrusion_gold.txt' % output
 
 		intru_all = {}
 		for tax_name in taxs:
@@ -144,7 +144,7 @@ def handler(folder, output, N, isa_N, case_N):
 		each_voter_n = 80
 		subset_n = 0
 
-		intru_exp_f = '%s/intrusion_exp_%d.csv' % (output, subset_n)
+		intru_exp_f = '%s\\intrusion_exp_%d.csv' % (output, subset_n)
 		g_exp = open(intru_exp_f, 'w+')
 		g_exp.write('0,1,2,3,4,5,outlier id\n')
 		
@@ -157,7 +157,7 @@ def handler(folder, output, N, isa_N, case_N):
 				idx += 1
 				if idx % each_voter_n == 0:
 					subset_n += 1
-					intru_exp_f = '%s/intrusion_exp_%d.csv' % (output, subset_n)
+					intru_exp_f = '%s\\intrusion_exp_%d.csv' % (output, subset_n)
 					g_exp.close()
 					g_exp = open(intru_exp_f, 'w+')
 					g_exp.write('0,1,2,3,4,5,outlier id\n')
@@ -166,7 +166,7 @@ def handler(folder, output, N, isa_N, case_N):
 
 	# The old isa evaluation
 	if False:
-		isa_gold_f = '%s/isa_gold.txt' % output
+		isa_gold_f = '%s\\isa_gold.txt' % output
 
 		intru_all = {}
 		for tax_name in taxs:
@@ -176,7 +176,7 @@ def handler(folder, output, N, isa_N, case_N):
 		each_voter_n = 125
 		subset_n = 0
 
-		intru_exp_f = '%s/isa_exp_%d.csv' % (output, subset_n)
+		intru_exp_f = '%s\\isa_exp_%d.csv' % (output, subset_n)
 		g_exp = open(intru_exp_f, 'w+')
 		g_exp.write(',0,1,parent id\n')
 		
@@ -189,14 +189,14 @@ def handler(folder, output, N, isa_N, case_N):
 				idx += 1
 				if idx % each_voter_n == 0:
 					subset_n += 1
-					intru_exp_f = '%s/isa_exp_%d.csv' % (output, subset_n)
+					intru_exp_f = '%s\\isa_exp_%d.csv' % (output, subset_n)
 					g_exp.close()
 					g_exp = open(intru_exp_f, 'w+')
 					g_exp.write(',0,1,parent id\n')
 
 
 	if True:
-		sub_gold_f = '%s/subdomain_gold.txt' % output
+		sub_gold_f = '%s\\subdomain_gold.txt' % output
 
 		intru_all = {}
 		for tax_name in taxs:
@@ -206,7 +206,7 @@ def handler(folder, output, N, isa_N, case_N):
 		each_voter_n = 80
 		subset_n = 0
 
-		intru_exp_f = '%s/subdomain_exp_%d.csv' % (output, subset_n)
+		intru_exp_f = '%s\\subdomain_exp_%d.csv' % (output, subset_n)
 		g_exp = open(intru_exp_f, 'w+')
 		g_exp.write('child,parent,y or n?\n')
 		
@@ -219,7 +219,7 @@ def handler(folder, output, N, isa_N, case_N):
 				idx += 1
 				if idx % each_voter_n == 0:
 					subset_n += 1
-					intru_exp_f = '%s/subdomain_exp_%d.csv' % (output, subset_n)
+					intru_exp_f = '%s\\subdomain_exp_%d.csv' % (output, subset_n)
 					g_exp.close()
 					g_exp = open(intru_exp_f, 'w+')
 					g_exp.write('child,parent,y or n?\n')

@@ -17,7 +17,7 @@ def load_nodes(node_file, min_level=1, max_level=3, prefix_list=['*']):
         # prune nodes
         if not has_one_prefix(node_id, prefix_list):
             continue
-        level = len(node_id.split('/')) - 1
+        level = len(node_id.split('\\')) - 1
         if not min_level <= level <= max_level:
             continue
         if max_level - min_level > 1 and level == min_level:
@@ -36,7 +36,7 @@ def has_one_prefix(node_id, prefix_list):
 def is_exact_prefix(s, prefix):
     if not s.startswith(prefix):
         return False
-    tmp = s.replace(prefix, '', 1).lstrip('/')
+    tmp = s.replace(prefix, '', 1).lstrip('\\')
     if '/' in tmp:
         return False
     return True
@@ -56,8 +56,8 @@ def gen_edges(nodes):
 def is_parent(node_a, node_b):
     if not node_b.startswith(node_a):
         return False
-    items_a = node_a.split('/')
-    items_b = node_b.split('/')
+    items_a = node_a.split('\\')
+    items_b = node_b.split('\\')
     if len(items_b) - len(items_a) == 1:
         return True
     else:
@@ -65,7 +65,7 @@ def is_parent(node_a, node_b):
 
 
 def gen_node_label(node_id, node_content):
-    node_name = node_id.split('/')[-1]
+    node_name = node_id.split('\\')[-1]
     keywords = '\\n'.join(node_content)
     if len(node_content) == 0:
         return node_name
@@ -86,8 +86,8 @@ def main(node_file, output_file, min_level, max_level, prefix='*'):
     edges = gen_edges(nodes)
     draw(nodes, edges, output_file)
 
-tax_dir = '/Users/chao/data/projects/local-embedding/dblp/taxonomies/'
-img_dir = '/Users/chao/data/projects/local-embedding/dblp/draw_tax/'
+tax_dir = 'E:\\This-Local\\Projects\\_emcdl\\taxogen\\data\\dblp\\taxonomies\\'
+img_dir = 'E:\\This-Local\\Projects\\_emcdl\\taxogen\\data\\dblp\\draw_tax\\'
 
 # main(tax_dir + 'toy.txt', img_dir + 'toy', min_level=2, max_level=4, prefix='*/computer_science')
 
@@ -114,19 +114,19 @@ img_dir = '/Users/chao/data/projects/local-embedding/dblp/draw_tax/'
 
 
 prefix_list = ['*', '*/information_retrieval', '*/information_retrieval/web_search']
-main(tax_dir + 'ours.txt', img_dir + 'our-overall', min_level=0, max_level=3, prefix=prefix_list)
+main(tax_dir + 'our-l5-015.txt', img_dir + 'our-overall-l5-015', min_level=0, max_level=3, prefix=prefix_list)
 
 prefix_list = ['*/learning_algorithms', '*/learning_algorithms/neural_network']
-main(tax_dir + 'ours.txt', img_dir + 'our-overall-ml', min_level=1, max_level=3, prefix=prefix_list)
+main(tax_dir + 'our-l5-015.txt', img_dir + 'our-overall-ml-l5-015', min_level=1, max_level=3, prefix=prefix_list)
 
-prefix_list = ['*/information_retrieval/web_search/']
-main(tax_dir + 'no-localembedding.txt', img_dir + 'no-local-l4-ws', min_level=3, max_level=3, prefix=prefix_list)
+# prefix_list = ['*/information_retrieval/web_search/']
+# main(tax_dir + 'no-localembedding.txt', img_dir + 'no-local-l4-ws', min_level=3, max_level=3, prefix=prefix_list)
 
-prefix_list = ['*/learning_algorithms/neural_networks/']
-main(tax_dir + 'no-localembedding.txt', img_dir + 'no-local-l4-nn', min_level=3, max_level=3, prefix=prefix_list)
+# prefix_list = ['*/learning_algorithms/neural_networks/']
+# main(tax_dir + 'no-localembedding.txt', img_dir + 'no-local-l4-nn', min_level=3, max_level=3, prefix=prefix_list)
 
-prefix_list = ['*/learning_algorithms/neural_network/']
-main(tax_dir + 'no-caseolap.txt', img_dir + 'no-case-l4-nn', min_level=3, max_level=3, prefix=prefix_list)
+# prefix_list = ['*/learning_algorithms/neural_network/']
+# main(tax_dir + 'no-caseolap.txt', img_dir + 'no-case-l4-nn', min_level=3, max_level=3, prefix=prefix_list)
 
-prefix_list = ['*/1/1/']
-main(tax_dir + 'hlda.txt', img_dir + 'hlda-l4', min_level=3, max_level=3, prefix=prefix_list)
+# prefix_list = ['*/1/1/']
+# main(tax_dir + 'hlda.txt', img_dir + 'hlda-l4', min_level=3, max_level=3, prefix=prefix_list)

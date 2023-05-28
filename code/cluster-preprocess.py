@@ -130,7 +130,7 @@ def main(raw_dir, input_dir, init_dir):
 # init_dir = '/shared/data/czhang82/projects/local-embedding/sp/init/'
 if __name__ == '__main__':
     corpusName = 'dblp'
-    raw_dir = '../data/'+corpusName+'/raw/'
-    input_dir = '../data/'+corpusName+'/input/'
-    init_dir = '../data/'+corpusName+'/init/'
+    raw_dir = '..\\data\\'+corpusName+'\\raw\\'
+    input_dir = '..\\data\\'+corpusName+'\\input\\'
+    init_dir = '..\\data\\'+corpusName+'\\init\\'
     main(raw_dir, input_dir, init_dir)

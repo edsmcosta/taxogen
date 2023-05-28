@@ -82,7 +82,7 @@ if __name__ == "__main__":
                         help='The files used.')
     args = parser.parse_args()
 
-    input_f = '%s/caseolap-%s.txt' % (args.folder, args.iter)
-    output_f = '%s/keywords-%s.txt' % (args.folder, args.iter)
+    input_f = '%s\\caseolap-%s.txt' % (args.folder, args.iter)
+    output_f = '%s\\keywords-%s.txt' % (args.folder, args.iter)
 
     main_rank_phrase(input_f, output_f, float(args.thres))
